@@ -1,3 +1,5 @@
+import { boxes } from './rules.js';
+
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 // canvas.style.backgroundColor = 'black';
@@ -6,7 +8,7 @@ sizer();
 // window.addEventListener('resize', sizer);
 
 let startX = 0, startY = 0;
-let size = 2;
+let size = 50;
 let xQuotient = Math.floor(canvas.width/size);
 let yQuotient = Math.floor(canvas.height/size);
 const n = xQuotient;
@@ -35,7 +37,7 @@ function timeStep (last) {
     }
     startX += size;
   }
-  console.log(`next: ${next} ${next.length}`);
+  // console.log(`next: ${next} ${next.length}`);
   
   
   count++

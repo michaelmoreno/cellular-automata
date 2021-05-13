@@ -26,27 +26,24 @@ body #rule {
   margin-top: 105px;
 }
 body #rule .box {
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  width: 100px;
-  border: 0.1px solid #ccc;
-}
-body #rule .box .container {
   flex-direction: column;
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  height: 95%;
-  width: 95%;
+  height: 100px;
+  width: 100px;
+  border: 0.1px solid #ccc;
 }
-body #rule .box .container .bit {
+body #rule .box:hover {
+  cursor: pointer;
+}
+body #rule .box .bit {
   width: 25%;
   height: 25%;
   margin: 2px;
   border: 1px solid black;
 }
-body #rule .box .container .on {
+body #rule .box .on {
   background-color: black;
 }
 

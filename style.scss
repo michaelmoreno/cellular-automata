@@ -26,30 +26,25 @@ body {
     margin-top: 105px;
 
     .box {
+      flex-direction: column;
       justify-content: center;
-      align-items: center;
+      align-content: center;
+      flex-wrap: wrap;
       height: 100px;
       width: 100px;
       border: 0.1px solid #ccc;
-    
-      .container {
-        flex-direction: column;
-        justify-content: center;
-        // align-items: center;
-        align-content: center;
-        flex-wrap: wrap;
-        height: 95%;        
-        width: 95%;
-        
-        .bit {
-          width: 25%;
-          height: 25%;
-          margin: 2px;
-          border: 1px solid black;
-        }
-        .on {
-          background-color: black;
-        }
+      &:hover {
+        cursor: pointer;
+      }
+      
+      .bit {
+        width: 25%;
+        height: 25%;
+        margin: 2px;
+        border: 1px solid black;
+      }
+      .on {
+        background-color: black;
       }
     }
   }
