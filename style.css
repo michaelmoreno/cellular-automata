@@ -26,7 +26,6 @@ body #rule {
   margin-top: 105px;
 }
 body #rule .box {
-  flex-direction: column;
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;

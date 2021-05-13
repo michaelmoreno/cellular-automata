@@ -1,4 +1,4 @@
-import { boxes } from './rules.js';
+import { boxes, checkRules } from './rules.js';
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
@@ -29,6 +29,8 @@ function timeStep (last) {
   for (let i = 0; i < last.length; i++) {
     let leftNeighbor = last[i-1] != undefined ? last[i-1]:last[last.length-1];
     let rightNeighbor = last[i+1] != undefined ? last[i+1]:last[last[0]];
+    let neighborhood = [leftNeighbor, last[i], rightNeighbor];
+    checkRules(neighborhood);
     drawCell();
     if (!(leftNeighbor == rightNeighbor)) {
       ctx.fill();
