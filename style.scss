@@ -1,0 +1,58 @@
+div {
+  display: flex;
+}
+
+body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+
+  canvas {
+    position: absolute;
+    z-index: -1;
+  }
+  #rule {
+    /* position: absolute; */
+    flex-direction: column;
+    border-radius: 7px;
+    box-shadow: 0px 0px 10px 3px #ccc;
+    background-color: white;
+    width: fit-content;
+    height: fit-content;
+    /* right: 50%; */
+    margin-left: 25px;
+    margin-top: 105px;
+
+    .box {
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      width: 100px;
+      border: 0.1px solid #ccc;
+    
+      .container {
+        flex-direction: column;
+        justify-content: center;
+        // align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+        height: 95%;        
+        width: 95%;
+        
+        .bit {
+          width: 25%;
+          height: 25%;
+          margin: 2px;
+          border: 1px solid black;
+        }
+        .on {
+          background-color: black;
+        }
+      }
+    }
+  }
+}
+
+
