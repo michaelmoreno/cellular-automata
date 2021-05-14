@@ -13,7 +13,15 @@ body canvas {
   position: absolute;
   z-index: -1;
 }
-body #rule {
+body #ui {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin-left: 25px;
+  margin-top: 105px;
+}
+body #ui #rule {
   /* position: absolute; */
   flex-direction: column;
   border-radius: 7px;
@@ -22,10 +30,8 @@ body #rule {
   width: fit-content;
   height: fit-content;
   /* right: 50%; */
-  margin-left: 25px;
-  margin-top: 105px;
 }
-body #rule .box {
+body #ui #rule .box {
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
@@ -33,17 +39,38 @@ body #rule .box {
   width: 100px;
   border: 0.1px solid #ccc;
 }
-body #rule .box:hover {
+body #ui #rule .box:hover {
   cursor: pointer;
 }
-body #rule .box .bit {
+body #ui #rule .box .bit {
   width: 25%;
   height: 25%;
   margin: 2px;
   border: 1px solid black;
 }
-body #rule .box .on {
+body #ui #rule .box .on {
   background-color: black;
+}
+body #ui input {
+  box-shadow: 0px 0px 10px 3px #ccc;
+  -webkit-appearance: none;
+  background-color: white;
+  border: 1px solid black;
+  width: 75%;
+  height: 10px;
+  margin: 20px 0;
+}
+body #ui input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  background-color: black;
+  border: 1px solid black;
+  width: 20px;
+  margin: 0;
+  padding: 0;
+}
+body #ui input:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */
