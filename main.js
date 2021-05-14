@@ -11,6 +11,7 @@ let startX = 0, startY = 0;
 let size = 12;
 let xQuotient = Math.floor(canvas.width/size);
 let yQuotient = Math.floor(canvas.height/size);
+// let yQuotient = 2;
 const n = xQuotient;
 const init = new Array(n).fill(0);
 init[Math.floor(init.length/2)] = 1;
@@ -19,11 +20,9 @@ let count = 0;
 const drawCell = () => {
   ctx.beginPath();
   ctx.rect(startX, startY, size, size);
-  ctx.stroke();
 }
 
 
-console.log(init);
 function timeStep (last) {
   let next = new Array(n).fill(0);
   for (let i = 0; i < last.length; i++) {
@@ -44,12 +43,18 @@ function timeStep (last) {
   startY += size;
   startX = 0;
   if (count < yQuotient)
-    timeStep(next);
+  timeStep(next);
 }
 
-timeStep(init);
 
+export function fire() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  startY = 0;
+  count = 0;
+  timeStep(init);
+}
 
+fire();
 
 
 
