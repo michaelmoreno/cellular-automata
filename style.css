@@ -19,7 +19,14 @@ body #ui {
   align-items: center;
   width: fit-content;
   margin-left: 25px;
-  margin-top: 105px;
+  margin-top: 35px;
+}
+body #ui #code {
+  font-size: 35px;
+  -webkit-text-stroke: 0.2px white;
+  font-weight: bold;
+  margin: 0;
+  user-select: none;
 }
 body #ui #rule {
   /* position: absolute; */

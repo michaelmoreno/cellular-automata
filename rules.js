@@ -1,6 +1,13 @@
 import { fire } from './main.js';
 
-const activeRules = [];
+function binaryToDecimal(byte) {
+  let sum = 0;
+  for (let i = 0, n = byte.length - 1; i < 8; i++, n--) {
+    sum += byte[n] * 2 ** i;
+  }
+  document.querySelector('#code').innerHTML = sum;
+  return sum;
+}
 
 const convertHTML = (bits) => {
   const converted = [];
@@ -10,40 +17,45 @@ const convertHTML = (bits) => {
   return converted;
 }
 
-const setRules = (state, inputs) => {
-  activeRules.length = 0;
-  if (state.contains('on')) {
-    activeRules.push(convertHTML(box.children))
-  }
-}
-const resetRules = () => {
-  activeRules.length = 0;
+const ruleCode = [];
+const activeRules = [];
 
+function resetRules() {
+  ruleCode.length = 0;
+  activeRules.length = 0;
+  
   boxes.forEach(box => {
-    let state = box.children[3].classList;
-    if (state.contains('on')) {
-      activeRules.push(convertHTML(box.children));
-    }
+    let inputs = box.children;
+    let output = box.children[3].classList;
+    parseRule(inputs, output)
   })
+  binaryToDecimal(ruleCode);
 }
 
-export const boxes = document.querySelectorAll('.box');
+const parseRule = (inputs, output) => {
+  ruleCode.push(output.contains('on') ? 1 : 0)
+  if (output.contains('on'))
+    activeRules.push(convertHTML(inputs))
+}
+
+const boxes = document.querySelectorAll('.box');
 boxes.forEach(box => {
-  let state = box.children[3].classList;
-  if (state.contains('on')) {
-    activeRules.push(convertHTML(box.children))
-  }
+  let inputs = box.children;
+  let output = box.children[3].classList;
+
+  parseRule(inputs, output)
   
   box.addEventListener('click', () => {
-    if (state.contains('on'))
-      state.remove('on')
+    if (output.contains('on'))
+    output.remove('on')
     else
-      state.add('on')
+    output.add('on')
     
     resetRules();
     fire();
   })
 })
+binaryToDecimal(ruleCode); 
 
 
 export function checkRules(neighborhood) {
