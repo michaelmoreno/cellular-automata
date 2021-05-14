@@ -1,4 +1,3 @@
-export const boxes = document.querySelectorAll('.box');
 
 const activeRules = [];
 
@@ -7,18 +6,17 @@ const convertHTML = (bits) => {
   for (let i = 0; i < bits.length-1; i++) {
     converted[i] = bits[i].classList.contains('on') ? 1:0 
   }
-  console.log(converted);
   return converted;
 }
 
+export const boxes = document.querySelectorAll('.box');
 boxes.forEach(box => {
-  if (box.children[3].classList.contains('on')) {
+  let state = box.children[3].classList;
+
+  if (state.contains('on')) {
     activeRules.push(convertHTML(box.children))
   }
-    
   box.addEventListener('click', () => {
-    let state = box.children[3].classList;
-
     if (state.contains('on'))
       state.remove('on')
     else
@@ -27,6 +25,21 @@ boxes.forEach(box => {
 })
 
 export function checkRules(neighborhood) {
+  for (let i = 0; i < activeRules.length; i++) {
+    // console.log(`n = ${neighborhood} aR = ${activeRules[i]}`);
+    // console.log(activeRules);
+    // console.log(` `);
+    let pass = true;
+    for (let n = 0; n < 3; n++) {
+      // console.log(`${n} - ${neighborhood[n]} -------- ${activeRules[i][n]}`);
+      if (neighborhood[n] != activeRules[i][n]) {
+        pass = false;
+        // console.log('fail!');
+        break;
+      }
+    }
+    if (pass) {
+      return true;
+    }
+  }
 }
-
-console.log(activeRules);

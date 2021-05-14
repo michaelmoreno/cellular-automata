@@ -8,34 +8,32 @@ sizer();
 // window.addEventListener('resize', sizer);
 
 let startX = 0, startY = 0;
-let size = 50;
+let size = 12;
 let xQuotient = Math.floor(canvas.width/size);
 let yQuotient = Math.floor(canvas.height/size);
 const n = xQuotient;
 const init = new Array(n).fill(0);
-init[Math.round(init.length/2)] = 1;
+init[Math.floor(init.length/2)] = 1;
 let count = 0;
 
 const drawCell = () => {
   ctx.beginPath();
   ctx.rect(startX, startY, size, size);
-  // ctx.stroke();
+  ctx.stroke();
 }
 
 
-console.log(`init: ${init} ${init.length}`);
+console.log(init);
 function timeStep (last) {
   let next = new Array(n).fill(0);
   for (let i = 0; i < last.length; i++) {
+    drawCell();
     let leftNeighbor = last[i-1] != undefined ? last[i-1]:last[last.length-1];
     let rightNeighbor = last[i+1] != undefined ? last[i+1]:last[last[0]];
     let neighborhood = [leftNeighbor, last[i], rightNeighbor];
-    checkRules(neighborhood);
-    drawCell();
-    if (!(leftNeighbor == rightNeighbor)) {
+    if (checkRules(neighborhood)) {
       ctx.fill();
       next[i] = 1;
-      // next[i+1] = 1;
     }
     startX += size;
   }
