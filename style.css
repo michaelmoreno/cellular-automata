@@ -28,6 +28,26 @@ body #ui #code {
   margin: 0;
   user-select: none;
 }
+body #ui #cycle p {
+  user-select: none;
+  font-size: 25px;
+  font-weight: bold;
+}
+body #ui #cycle p:hover {
+  cursor: pointer;
+}
+body #ui #cycle #toggle {
+  font-size: 35px;
+  margin: 0 10px;
+  padding: 0;
+  color: black;
+  -webkit-text-stroke: 1px white;
+  border: none;
+  background-color: transparent;
+}
+body #ui #cycle #toggle:hover {
+  cursor: pointer;
+}
 body #ui #rule {
   /* position: absolute; */
   flex-direction: column;
@@ -58,7 +78,7 @@ body #ui #rule .box .bit {
 body #ui #rule .box .on {
   background-color: black;
 }
-body #ui input {
+body #ui .slider {
   box-shadow: 0px 0px 10px 3px #ccc;
   -webkit-appearance: none;
   background-color: white;
@@ -67,7 +87,7 @@ body #ui input {
   height: 10px;
   margin: 20px 0;
 }
-body #ui input::-webkit-slider-thumb {
+body #ui .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 20px;
   background-color: black;
@@ -76,7 +96,7 @@ body #ui input::-webkit-slider-thumb {
   margin: 0;
   padding: 0;
 }
-body #ui input:hover {
+body #ui .slider:hover {
   cursor: pointer;
 }
 
