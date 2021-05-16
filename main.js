@@ -7,7 +7,6 @@ sizer();
 // window.addEventListener('resize', sizer);
 const slider = document.querySelector('.slider');
 
-
 let startX;
 let startY;
 let cellSize;

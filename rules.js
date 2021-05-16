@@ -1,97 +1,75 @@
 import { fire } from './main.js';
 import { combinations } from './cycle.js';
-const ruleCode = [];
+
+const rules = [
+  [1,1,1],
+  [1,1,0],
+  [1,0,1],
+  [1,0,0],
+  [0,1,1],
+  [0,1,0],
+  [0,0,1],
+  [0,0,0],
+]
+
 const activeRules = [];
-
-const boxes = document.querySelectorAll('.box');
-
 let currentRule = 30;
 let configuration = combinations[currentRule];
-
-const convertHTML = (bits) => {
-  const converted = [];
-  for (let i = 0; i < bits.length - 1; i++) {
-    converted[i] = bits[i].classList.contains('on') ? 1 : 0
-  }
-  return converted;
-}
-
-
-const parseRule = (inputs, output) => {
-  ruleCode.push(output.contains('on') ? 1 : 0)
-  if (output.contains('on'))
-    activeRules.push(convertHTML(inputs))
-}
-
-let loop;
-export const cycle = (toggle) => {
-  if (toggle) {
-    loop = setInterval(function() {
-      currentRule++;
-      configuration = combinations[currentRule]
-      updateUI(configuration);
-      resetRules();
-      fire();
-    }, 500)
-  }
-  else {
-    clearInterval(loop);
-  }
-}
-
-const updateUI = (configuration) => { // maybe don't need to pass config as param
-  for (let i = 0; i < boxes.length; i++) {
-    let state = boxes[i].children[3].classList;
-
-    if (configuration[i])
-      state.add('on')
-    else
-      state.remove('on');
-  }
-}
-
-updateUI(configuration);
 
 export function binaryToDecimal(byte) {
   let sum = 0;
   for (let i = 0, n = byte.length - 1; i < 8; i++, n--) {
     sum += byte[n] * 2 ** i;
   }
-  document.querySelector('#code').innerHTML = sum;
   return sum;
 }
 
-function resetRules() {
-  ruleCode.length = 0;
-  activeRules.length = 0;
-  
-  boxes.forEach(box => {
-    let inputs = box.children;
-    let output = box.children[3].classList;
-    parseRule(inputs, output)
-  })
-  currentRule = binaryToDecimal(ruleCode);
+const updateRules = (i) => {
+  if (i == 0)
+    activeRules.length = 0;
+
+  if (configuration[i])
+    activeRules.push(rules[i])
+
+  if (i == 7)
+    currentRule = binaryToDecimal(configuration);
 }
 
+const boxes = document.querySelectorAll('.box');
+const ruleDisplay = document.querySelector('#rule');
 
-boxes.forEach(box => {
-  let inputs = box.children;
-  let output = box.children[3].classList;
-
-  parseRule(inputs, output)
+const updateUI = (i) => { 
+  let state = boxes[i].children[3].classList;
   
-  box.addEventListener('click', () => {
-    if (output.contains('on'))
-    output.remove('on')
-    else
-    output.add('on')
-    
-    resetRules();
-    fire();
-  })
-})
-binaryToDecimal(ruleCode); 
+  if (configuration[i])
+    state.add('on')
+  else
+    state.remove('on');
 
+  ruleDisplay.innerHTML = currentRule;
+}
+
+function update() {
+  for (let i = 0; i < 8; i++) {
+    updateRules(i)
+    updateUI(i)
+  }
+  fire();
+}
+
+const toggleState = () => {
+  for (let i = 0; i < boxes.length; i++) {
+    boxes[i].addEventListener('click', () => {
+      configuration[i] = configuration[i] ? 0 : 1;
+      update();
+    });
+  }
+}
+
+window.onload = function() {
+  update();
+  toggleState();
+};
 
 export function checkRules(neighborhood) {
   for (let i = 0; i < activeRules.length; i++) {
@@ -108,3 +86,27 @@ export function checkRules(neighborhood) {
   }
 }
 
+let loop;
+const cycleRules = (toggle) => {
+  if (toggle) {
+    loop = setInterval(function() {
+      currentRule++;
+      configuration = combinations[currentRule];
+      update();
+    }, 500)
+  } else {
+    clearInterval(loop)
+  }
+}
+
+const cycleButton = document.querySelector('#toggle');
+cycleButton.addEventListener('click', () => {
+  if (cycleButton.innerHTML == '▶') {
+    cycleButton.innerHTML = '❚❚';
+    cycleRules(true);
+  }
+  else {
+    cycleButton.innerHTML = '▶';
+    cycleRules(false);
+  }
+})

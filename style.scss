@@ -22,16 +22,17 @@ body {
     margin-left: 25px;
     margin-top: 35px;
     
-    #code {
+    #rule {
       font-size: 35px;
-      // text-stroke: white;
       -webkit-text-stroke: 0.2px white;
       font-weight: bold;
       margin: 0;
       user-select: none;
     }
     #cycle {
-      
+      margin: 0;
+      padding: 0;
+
       p {
         user-select: none;
         font-size: 25px;
@@ -39,10 +40,10 @@ body {
         &:hover {
           cursor:pointer;
         }
+        margin: 6px 7px;
       }
       #toggle {
         font-size: 35px;
-        margin: 0 10px;
         padding: 0;
         color: black;
         -webkit-text-stroke: 1px white;
@@ -53,18 +54,15 @@ body {
         }
       }
     }
-    #rule {
-      /* position: absolute; */
+    #rules {
       flex-direction: column;
       border-radius: 7px;
       box-shadow: 0px 0px 10px 3px #ccc;
       background-color: white;
       width: fit-content;
       height: fit-content;
-      /* right: 50%; */
       
       .box {
-        // flex-direction: column;
         justify-content: center;
         align-content: center;
         flex-wrap: wrap;
@@ -103,7 +101,6 @@ body {
         width: 20px;
         margin: 0;
         padding: 0;
-        // border: 1px solid black;
       }
       &:hover {
         cursor: pointer;
