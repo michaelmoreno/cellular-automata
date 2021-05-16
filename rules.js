@@ -1,4 +1,4 @@
-import { fire } from './main.js';
+import { fire, stopCycle } from './main.js';
 import { combinations } from './cycle.js';
 
 const rules = [
@@ -24,7 +24,7 @@ export function binaryToDecimal(byte) {
   return sum;
 }
 
-const updateRules = (i) => {
+const updateRule = (i) => {
   if (i == 0)
     activeRules.length = 0;
 
@@ -50,8 +50,9 @@ const updateUI = (i) => {
 }
 
 function update() {
+  console.log(`update`);
   for (let i = 0; i < 8; i++) {
-    updateRules(i)
+    updateRule(i)
     updateUI(i)
   }
   fire();
@@ -61,6 +62,7 @@ const toggleState = () => {
   for (let i = 0; i < boxes.length; i++) {
     boxes[i].addEventListener('click', () => {
       configuration[i] = configuration[i] ? 0 : 1;
+      stopCycle()
       update();
     });
   }
@@ -86,27 +88,11 @@ export function checkRules(neighborhood) {
   }
 }
 
-let loop;
-const cycleRules = (toggle) => {
-  if (toggle) {
-    loop = setInterval(function() {
-      currentRule++;
-      configuration = combinations[currentRule];
-      update();
-    }, 500)
-  } else {
-    clearInterval(loop)
-  }
-}
+export const cycleRule = () => {
+  currentRule++;
+  if (currentRule > 255)
+    currentRule = 0;
 
-const cycleButton = document.querySelector('#toggle');
-cycleButton.addEventListener('click', () => {
-  if (cycleButton.innerHTML == '▶') {
-    cycleButton.innerHTML = '❚❚';
-    cycleRules(true);
-  }
-  else {
-    cycleButton.innerHTML = '▶';
-    cycleRules(false);
-  }
-})
+  configuration = combinations[currentRule];
+  update();
+}

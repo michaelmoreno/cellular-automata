@@ -1,4 +1,5 @@
 import { checkRules } from './rules.js';
+import { cycleRule } from './rules.js';
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
@@ -32,85 +33,63 @@ const drawCell = () => {
 }
 
 function timeStep(last) {
+  ctx.clearRect(0, startY, canvas.width, cellSize);
+
   let next = new Array(xQuotient).fill(0);
   for (let i = 0; i < last.length; i++) {
     drawCell();
-    let leftNeighbor = last[i-1] != undefined ? last[i-1]:last[last.length-1];
-    let rightNeighbor = last[i+1] != undefined ? last[i+1]:last[last[0]];
+    let leftNeighbor = last[i - 1] != undefined ? last[i - 1] : last[last.length - 1];
+    let rightNeighbor = last[i + 1] != undefined ? last[i + 1] : last[last[0]];
     let neighborhood = [leftNeighbor, last[i], rightNeighbor];
-    
+
     if (checkRules(neighborhood)) {
       ctx.fill();
       next[i] = 1;
     }
     startX += cellSize;
   }
+
   startY += cellSize;
   startX = 0;
-  
   steps++
-  if (steps < yQuotient)
-    timeStep(next);
+  return next;
+}
+
+let cycle = false;
+function render() {
+  init = timeStep(init)
+  if (steps <= yQuotient)
+    requestAnimationFrame(render)
+    
+  else if (cycle) {
+    console.log('finished');
+    cycleRule()
+  }
 }
 
 export function fire() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  cancelAnimationFrame(render)
   setup();
-  timeStep(init);
+  render();
 }
-fire();
-
 
 slider.addEventListener('input', () => {
   fire();
 })
 
+export const stopCycle = () => {
+  cycle = false; 
+  cycleButton.innerHTML = '▶';
+};
 
-
-
-
-
-
-
-
-
-
-// let cells = [0,1,0,0,1,0,0,0,0];
-// // for (let i = 0; i < 9; 1++) {
-// //   cells.push 
-// // }
-
-// const length = canvas.width / cells.length;
-// console.log(length);
-
-// ctx.strokeStyle = 'black';
-// ctx.fillStyle = 'black';
-// let steps = 0;
-
-// let startX = 0;
-// let startY = 0;
-// function render() {
-//   // ctx.clearRect(0, 0, canvas.width, canvas.height);
-//   startX = 0;
-//   var copy = cells;
-//   console.log(copy);
-//   for (let i = 0; i < cells.length; i++) {
-//     ctx.beginPath();
-//     ctx.rect(startX, startY, length, 30);
-//     ctx.closePath();
-//     ctx.stroke();
-//       if (!(cells[i-1] == cells[i+1])) {
-//         ctx.fill();
-//         copy[i] = 1;
-//       } else {
-//         copy[i] = 0
-//       }
-//       startX += length;
-//     }
-//     cells = copy;
-//   startY += 30;
-//   steps++
-//   requestAnimationFrame(render);
-// }
-
-// render();
+const cycleButton = document.querySelector('#toggle');
+cycleButton.addEventListener('click', () => {
+  if (cycleButton.innerHTML == '▶') {
+    cycleButton.innerHTML = '❚❚';
+    cycle = true;
+    cycleRule();
+  }
+  else {
+    stopCycle()
+  }
+})
