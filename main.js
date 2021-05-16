@@ -79,13 +79,13 @@ slider.addEventListener('input', () => {
 
 export const stopCycle = () => {
   cycle = false; 
-  cycleButton.innerHTML = '▶';
+  cycleButton.innerHTML = '<i class="fas fa-play"></i>';
 };
 
 const cycleButton = document.querySelector('#toggle');
 cycleButton.addEventListener('click', () => {
-  if (cycleButton.innerHTML == '▶') {
-    cycleButton.innerHTML = '❚❚';
+  if (cycleButton.innerHTML == '<i class="fas fa-play"></i>') {
+    cycleButton.innerHTML = '<i class="fas fa-pause"></i>';
     cycle = true;
     cycleRule();
   }
@@ -93,3 +93,4 @@ cycleButton.addEventListener('click', () => {
     stopCycle()
   }
 })
+

@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+  
 div {
   display: flex;
 }
+
+
 
 body {
   overflow: hidden;
@@ -13,54 +17,58 @@ body {
     position: absolute;
     z-index: -1;
   }
-
+  
   #ui {
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    box-shadow: 0px 0px 10px 3px #ccc;
+    align-items: center;
+    width: 0;
     width: fit-content;
-    margin-left: 25px;
-    margin-top: 35px;
+    height: 100vh;
+    background-color: white;
     
-    #rule {
-      font-size: 35px;
-      -webkit-text-stroke: 0.2px white;
-      font-weight: bold;
-      margin: 0;
-      user-select: none;
-    }
     #cycle {
-      margin: 0;
-      padding: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-      p {
-        user-select: none;
-        font-size: 25px;
-        font-weight: bold;
-        &:hover {
-          cursor:pointer;
-        }
-        margin: 6px 7px;
-      }
-      #toggle {
+      #rule {
         font-size: 35px;
+        font-weight: bold;
+        margin: 0;
         padding: 0;
-        color: black;
-        -webkit-text-stroke: 1px white;
-        border: none;
-        background-color: transparent;
-        &:hover {
-          cursor: pointer;
+        user-select: none;
+        font-family: 'Montserrat', sans-serif;
+      }
+      #controller {
+        margin: 0;
+        padding: 0;
+        
+        p {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          user-select: none;
+          font-size: 25px;
+          font-weight: bold;
+          &:hover {
+            cursor:pointer;
+          }
+          margin: 6px 7px;
         }
       }
     }
     #rules {
       flex-direction: column;
       border-radius: 7px;
-      box-shadow: 0px 0px 10px 3px #ccc;
       background-color: white;
       width: fit-content;
       height: fit-content;
+      // margin-bottom: 25px;
+      border-bottom: 0.1px solid #ccc;
+      
       
       .box {
         justify-content: center;
@@ -68,7 +76,7 @@ body {
         flex-wrap: wrap;
         height: 100px;
         width: 100px;
-        border: 0.1px solid #ccc;
+        border-top: 0.1px solid #ccc;
         &:hover {
           cursor: pointer;
         }
@@ -89,15 +97,18 @@ body {
       -webkit-appearance: none;
       background-color: white;
       border: 1px solid black;
-      width: 75%;
-      height: 10px;
-      margin: 20px 0;
+      border-radius: 10px;
+      width: 85px;
+      height: 7px;
+      padding: 0;
+      outline: none;
       
       &::-webkit-slider-thumb {
         -webkit-appearance: none;
-        height: 20px;
+        height: 20.6px;
         background-color: black;
         border: 1px solid black;
+        border-radius: 50%;
         width: 20px;
         margin: 0;
         padding: 0;
@@ -105,6 +116,10 @@ body {
       &:hover {
         cursor: pointer;
       }
+    }
+    #resolution {
+      border: 1px solid red;
+
     }
   }
 }

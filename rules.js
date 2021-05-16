@@ -1,5 +1,5 @@
 import { fire, stopCycle } from './main.js';
-import { combinations } from './cycle.js';
+import { combinations } from './combinations.js';
 
 const rules = [
   [1,1,1],

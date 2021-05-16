@@ -6,15 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cellular Automata</title>
   <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 </head>
 <body>
   <canvas></canvas>
 	<div id="ui">
-		<p id="rule" contenteditable="true"></p>
 		<div id="cycle">
-			<p><</p>
-			<button id="toggle">&#9654;</button>
-			<p id="forwards">></p>
+			<p id="rule" contenteditable="true"></p>
+			<div id="controller">
+				<p><i class="fas fa-backward"></i></p>
+				<p id="toggle"><i class="fas fa-play"></i></p>
+				<p><i class="fas fa-forward"></i></p>
+			</div>
 		</div>
 		<div id="rules">
 			<div class="box">
