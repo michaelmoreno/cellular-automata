@@ -4,8 +4,6 @@ div {
   display: flex;
 }
 
-
-
 body {
   overflow: hidden;
   margin: 0;
@@ -41,6 +39,10 @@ body {
         padding: 0;
         user-select: none;
         font-family: 'Montserrat', sans-serif;
+        padding: 0px 10px;
+        max-width: 85px;
+        max-height: 45px;
+        overflow: hidden;
       }
       #controller {
         margin: 0;

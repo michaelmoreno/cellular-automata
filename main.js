@@ -1,5 +1,6 @@
 import { checkRules } from './rules.js';
 import { cycleRule } from './rules.js';
+import { cycle } from './interface.js';
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
@@ -55,16 +56,13 @@ function timeStep(last) {
   return next;
 }
 
-let cycle = false;
 function render() {
   init = timeStep(init)
   if (steps <= yQuotient)
     requestAnimationFrame(render)
     
-  else if (cycle) {
-    console.log('finished');
+  else if (cycle)
     cycleRule()
-  }
 }
 
 export function fire() {
@@ -72,25 +70,3 @@ export function fire() {
   setup();
   render();
 }
-
-slider.addEventListener('input', () => {
-  fire();
-})
-
-export const stopCycle = () => {
-  cycle = false; 
-  cycleButton.innerHTML = '<i class="fas fa-play"></i>';
-};
-
-const cycleButton = document.querySelector('#toggle');
-cycleButton.addEventListener('click', () => {
-  if (cycleButton.innerHTML == '<i class="fas fa-play"></i>') {
-    cycleButton.innerHTML = '<i class="fas fa-pause"></i>';
-    cycle = true;
-    cycleRule();
-  }
-  else {
-    stopCycle()
-  }
-})
-

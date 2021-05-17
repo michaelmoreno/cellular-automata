@@ -37,6 +37,10 @@ body #ui #cycle #rule {
   padding: 0;
   user-select: none;
   font-family: "Montserrat", sans-serif;
+  padding: 0px 10px;
+  max-width: 85px;
+  max-height: 45px;
+  overflow: hidden;
 }
 body #ui #cycle #controller {
   margin: 0;

@@ -1,4 +1,5 @@
-import { fire, stopCycle } from './main.js';
+import { fire } from './main.js';
+import { stopCycle } from './interface.js';
 import { combinations } from './combinations.js';
 
 const rules = [
@@ -10,13 +11,13 @@ const rules = [
   [0,1,0],
   [0,0,1],
   [0,0,0],
-]
+];
 
 const activeRules = [];
 let currentRule = 30;
 let configuration = combinations[currentRule];
 
-export function binaryToDecimal(byte) {
+function binaryToDecimal(byte) {
   let sum = 0;
   for (let i = 0, n = byte.length - 1; i < 8; i++, n--) {
     sum += byte[n] * 2 ** i;
@@ -50,7 +51,6 @@ const updateUI = (i) => {
 }
 
 function update() {
-  console.log(`update`);
   for (let i = 0; i < 8; i++) {
     updateRule(i)
     updateUI(i)
@@ -73,7 +73,7 @@ window.onload = function() {
   toggleState();
 };
 
-export function checkRules(neighborhood) {
+function checkRules(neighborhood) {
   for (let i = 0; i < activeRules.length; i++) {
     let pass = true;
     for (let n = 0; n < 3; n++) {
@@ -88,11 +88,17 @@ export function checkRules(neighborhood) {
   }
 }
 
-export const cycleRule = () => {
-  currentRule++;
+const cycleRule = (n = 1) => {
+  currentRule += n;
   if (currentRule > 255)
     currentRule = 0;
 
   configuration = combinations[currentRule];
   update();
+}
+
+export {
+  currentRule,
+  checkRules,
+  cycleRule
 }
