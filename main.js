@@ -1,6 +1,7 @@
 import { checkRules } from './rules.js';
 import { cycleRule } from './rules.js';
-import { cycle } from './interface.js';
+import { cycle, rainbowToggle } from './interface.js';
+import { rainbow } from './rainbow.js';
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
@@ -33,20 +34,33 @@ const drawCell = () => {
   ctx.rect(startX, startY, cellSize, cellSize);
 }
 
+const ex = [
+  [255, 0, 0],
+  [255,255,0],
+  [0, 255, 0],
+  [0,255,255],
+  [0,0,255],
+  [255,0,255],
+  [255,0,0],
+]
+
+
 function timeStep(last) {
   ctx.clearRect(0, startY, canvas.width, cellSize);
-
   let next = new Array(xQuotient).fill(0);
+  let rgb = rainbow(yQuotient)
   for (let i = 0; i < last.length; i++) {
     drawCell();
     let leftNeighbor = last[i - 1] != undefined ? last[i - 1] : last[last.length - 1];
     let rightNeighbor = last[i + 1] != undefined ? last[i + 1] : last[last[0]];
     let neighborhood = [leftNeighbor, last[i], rightNeighbor];
-
+    
     if (checkRules(neighborhood)) {
+      ctx.fillStyle = rainbowToggle ? `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`:'black';
       ctx.fill();
       next[i] = 1;
     }
+    
     startX += cellSize;
   }
 
@@ -56,6 +70,7 @@ function timeStep(last) {
   return next;
 }
 
+let p = 0;
 function render() {
   init = timeStep(init)
   if (steps <= yQuotient)

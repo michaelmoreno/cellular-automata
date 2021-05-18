@@ -124,6 +124,25 @@ body {
 
     }
   }
+  #rainbow {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    height: fit-content;
+    width: fit-content;
+    font-size: 50px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .default {
+    background-image: linear-gradient(to bottom, red, red, orange, yellow,rgb(0, 190, 0), rgb(3, 200, 255), rgb(3, 200, 255), purple, purple);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
 }
 
 

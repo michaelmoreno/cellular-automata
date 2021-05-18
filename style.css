@@ -113,5 +113,24 @@ body #ui .slider:hover {
 body #ui #resolution {
   border: 1px solid red;
 }
+body #rainbow {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  height: fit-content;
+  width: fit-content;
+  font-size: 50px;
+}
+body #rainbow:hover {
+  cursor: pointer;
+}
+body .default {
+  background-image: linear-gradient(to bottom, red, red, orange, yellow, #00be00, #03c8ff, #03c8ff, purple, purple);
+  -webkit-background-clip: text;
+  color: transparent;
+}
 
 /*# sourceMappingURL=style.css.map */

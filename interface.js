@@ -56,3 +56,15 @@ const slider = document.querySelector('.slider');
 slider.addEventListener('input', () => {
   fire();
 })
+
+export let rainbowToggle = false;
+const rainbowButton = document.querySelector('#rainbow');
+rainbowButton.addEventListener('click', () => {
+  rainbowToggle = !rainbowToggle;
+  if (rainbowButton.classList.contains('default'))
+    rainbowButton.classList.remove('default')
+  else 
+    rainbowButton.classList.add('default')
+  stopCycle();
+  fire();
+})
